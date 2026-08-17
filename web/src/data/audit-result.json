@@ -1,0 +1,1938 @@
+{
+  "meta": {
+    "generatedAt": "2026-08-17T12:26:08.573Z",
+    "schedulingPeriod": "2026-09-01 to 2026-09-30",
+    "sourceFiles": [
+      "providers.xlsx",
+      "coverage_requirements.xlsx",
+      "approved_leave.xlsx",
+      "preferences.xlsx",
+      "draft_schedule.xlsx"
+    ],
+    "providerCount": 10,
+    "siteCount": 2,
+    "shiftCount": 142,
+    "totalHours": 1404
+  },
+  "publishable": false,
+  "summary": {
+    "hardViolationCount": 19,
+    "softFindingCount": 27,
+    "dataIssueCount": 3,
+    "providersAffected": 10,
+    "byRule": {
+      "H1": 1,
+      "H2": 1,
+      "H3": 2,
+      "H4": 1,
+      "H5": 6,
+      "H6": 1,
+      "H7": 1,
+      "H8": 6,
+      "H9": 1,
+      "S1": 8,
+      "S2": 2,
+      "S3": 16,
+      "S4": 1,
+      "DATA": 2
+    }
+  },
+  "findings": [
+    {
+      "id": "H1-001",
+      "severity": "HARD",
+      "rule": "H1",
+      "ruleName": "Every required shift covered by exactly one provider",
+      "providerId": null,
+      "providerName": null,
+      "siteCode": "RBM",
+      "shiftDate": "2026-09-29",
+      "shiftCode": "RBM-E",
+      "summary": "RBM-E on Tue, Sep 29 is unfilled",
+      "detail": "This required shift appears in the draft schedule with no provider assigned.",
+      "evidence": {
+        "requirement": {
+          "key": "2026-09-29|RBM|RBM-E",
+          "shiftDate": "2026-09-29",
+          "siteCode": "RBM",
+          "shiftCode": "RBM-E",
+          "startTime": "15:00",
+          "endTime": "23:00",
+          "providersRequired": 1
+        },
+        "scheduleRow": {
+          "key": "2026-09-29|RBM|RBM-E",
+          "shiftDate": "2026-09-29",
+          "siteCode": "RBM",
+          "shiftCode": "RBM-E",
+          "startTime": "15:00",
+          "endTime": "23:00",
+          "providerId": null,
+          "providerNameRaw": null,
+          "startDateTime": "2026-09-29T15:00:00.000Z",
+          "endDateTime": "2026-09-29T23:00:00.000Z",
+          "isNight": false,
+          "durationHours": 8
+        }
+      },
+      "suggestedAction": "Assign a credentialed, eligible provider to this shift before publishing."
+    },
+    {
+      "id": "H2-002",
+      "severity": "HARD",
+      "rule": "H2",
+      "ruleName": "Provider works only at sites they are credentialed for",
+      "providerId": "P-003",
+      "providerName": "Wei Chen",
+      "siteCode": "PHC",
+      "shiftDate": "2026-09-10",
+      "shiftCode": "PHC-D",
+      "summary": "Wei Chen (P-003) is scheduled at PHC but is only credentialed for RBM",
+      "detail": "PHC-D on Thu, Sep 10.",
+      "evidence": {
+        "scheduleRow": {
+          "key": "2026-09-10|PHC|PHC-D",
+          "shiftDate": "2026-09-10",
+          "siteCode": "PHC",
+          "shiftCode": "PHC-D",
+          "startTime": "08:00",
+          "endTime": "20:00",
+          "providerId": "P-003",
+          "providerNameRaw": "Wei Chen",
+          "startDateTime": "2026-09-10T08:00:00.000Z",
+          "endDateTime": "2026-09-10T20:00:00.000Z",
+          "isNight": false,
+          "durationHours": 12
+        },
+        "credentialedSites": [
+          "RBM"
+        ]
+      },
+      "suggestedAction": "Reassign this shift to a provider credentialed for this site."
+    },
+    {
+      "id": "H3-003",
+      "severity": "HARD",
+      "rule": "H3",
+      "ruleName": "Night shifts worked only by night-eligible providers; PAs never work nights",
+      "providerId": "P-004",
+      "providerName": "Delgado, Rosa",
+      "siteCode": "PHC",
+      "shiftDate": "2026-09-15",
+      "shiftCode": "PHC-N",
+      "summary": "Delgado, Rosa (P-004) is scheduled for a night shift (PHC-N) on Tue, Sep 15: not marked night_eligible on the roster",
+      "detail": "Role: Physician, night_eligible: N.",
+      "evidence": {
+        "scheduleRow": {
+          "key": "2026-09-15|PHC|PHC-N",
+          "shiftDate": "2026-09-15",
+          "siteCode": "PHC",
+          "shiftCode": "PHC-N",
+          "startTime": "20:00",
+          "endTime": "08:00",
+          "providerId": "P-004",
+          "providerNameRaw": "Delgado, Rosa",
+          "startDateTime": "2026-09-15T20:00:00.000Z",
+          "endDateTime": "2026-09-16T08:00:00.000Z",
+          "isNight": true,
+          "durationHours": 12
+        },
+        "role": "Physician",
+        "nightEligible": false
+      },
+      "suggestedAction": "Reassign this night shift to an eligible physician."
+    },
+    {
+      "id": "H3-004",
+      "severity": "HARD",
+      "rule": "H3",
+      "ruleName": "Night shifts worked only by night-eligible providers; PAs never work nights",
+      "providerId": "P-008",
+      "providerName": "Halvorsen, Kai",
+      "siteCode": "RBM",
+      "shiftDate": "2026-09-25",
+      "shiftCode": "RBM-N",
+      "summary": "Halvorsen, Kai (P-008) is scheduled for a night shift (RBM-N) on Fri, Sep 25: not marked night_eligible on the roster; PAs do not work nights, regardless of the night_eligible flag",
+      "detail": "Role: PA, night_eligible: N.",
+      "evidence": {
+        "scheduleRow": {
+          "key": "2026-09-25|RBM|RBM-N",
+          "shiftDate": "2026-09-25",
+          "siteCode": "RBM",
+          "shiftCode": "RBM-N",
+          "startTime": "23:00",
+          "endTime": "07:00",
+          "providerId": "P-008",
+          "providerNameRaw": "Halvorsen, Kai",
+          "startDateTime": "2026-09-25T23:00:00.000Z",
+          "endDateTime": "2026-09-26T07:00:00.000Z",
+          "isNight": true,
+          "durationHours": 8
+        },
+        "role": "PA",
+        "nightEligible": false
+      },
+      "suggestedAction": "Reassign this night shift to an eligible physician."
+    },
+    {
+      "id": "H4-005",
+      "severity": "HARD",
+      "rule": "H4",
+      "ruleName": "No overlapping shifts or two shifts starting the same day",
+      "providerId": "P-009",
+      "providerName": "beth iverson",
+      "siteCode": "PHC",
+      "shiftDate": "2026-09-14",
+      "shiftCode": "PHC-D",
+      "summary": "beth iverson (P-009) is double-booked: PHC-D on Mon, Sep 14 and RBM-E on Mon, Sep 14 (both begin on the same calendar day and their times overlap)",
+      "detail": "PHC-D runs 8 AM to 8 PM on Mon, Sep 14, and RBM-E runs 3 PM to 11 PM on Mon, Sep 14.",
+      "evidence": {
+        "shiftA": {
+          "key": "2026-09-14|PHC|PHC-D",
+          "shiftDate": "2026-09-14",
+          "siteCode": "PHC",
+          "shiftCode": "PHC-D",
+          "startTime": "08:00",
+          "endTime": "20:00",
+          "providerId": "P-009",
+          "providerNameRaw": "Beth Iverson",
+          "startDateTime": "2026-09-14T08:00:00.000Z",
+          "endDateTime": "2026-09-14T20:00:00.000Z",
+          "isNight": false,
+          "durationHours": 12
+        },
+        "shiftB": {
+          "key": "2026-09-14|RBM|RBM-E",
+          "shiftDate": "2026-09-14",
+          "siteCode": "RBM",
+          "shiftCode": "RBM-E",
+          "startTime": "15:00",
+          "endTime": "23:00",
+          "providerId": "P-009",
+          "providerNameRaw": "Beth Iverson",
+          "startDateTime": "2026-09-14T15:00:00.000Z",
+          "endDateTime": "2026-09-14T23:00:00.000Z",
+          "isNight": false,
+          "durationHours": 8
+        }
+      },
+      "suggestedAction": "Remove one of these two assignments and find coverage for whichever shift is dropped."
+    },
+    {
+      "id": "H5-006",
+      "severity": "HARD",
+      "rule": "H5",
+      "ruleName": "Minimum 10 hours off between shifts",
+      "providerId": "P-009",
+      "providerName": "beth iverson",
+      "siteCode": "PHC",
+      "shiftDate": "2026-09-02",
+      "shiftCode": "PHC-D",
+      "summary": "beth iverson (P-009) only gets 9.0 hours of rest between shifts on Tue, Sep 1 and Wed, Sep 2",
+      "detail": "RBM-E ends at 11 PM on Tue, Sep 1, and PHC-D starts at 8 AM on Wed, Sep 2. That leaves 9.0 hours of rest; the minimum is 10.",
+      "evidence": {
+        "shiftA": {
+          "key": "2026-09-01|RBM|RBM-E",
+          "shiftDate": "2026-09-01",
+          "siteCode": "RBM",
+          "shiftCode": "RBM-E",
+          "startTime": "15:00",
+          "endTime": "23:00",
+          "providerId": "P-009",
+          "providerNameRaw": "Beth Iverson",
+          "startDateTime": "2026-09-01T15:00:00.000Z",
+          "endDateTime": "2026-09-01T23:00:00.000Z",
+          "isNight": false,
+          "durationHours": 8
+        },
+        "shiftB": {
+          "key": "2026-09-02|PHC|PHC-D",
+          "shiftDate": "2026-09-02",
+          "siteCode": "PHC",
+          "shiftCode": "PHC-D",
+          "startTime": "08:00",
+          "endTime": "20:00",
+          "providerId": "P-009",
+          "providerNameRaw": "Beth Iverson",
+          "startDateTime": "2026-09-02T08:00:00.000Z",
+          "endDateTime": "2026-09-02T20:00:00.000Z",
+          "isNight": false,
+          "durationHours": 12
+        },
+        "gapHours": 9
+      },
+      "suggestedAction": "Push the second shift later or reassign it to give this provider a full rest period."
+    },
+    {
+      "id": "H5-007",
+      "severity": "HARD",
+      "rule": "H5",
+      "ruleName": "Minimum 10 hours off between shifts",
+      "providerId": "P-010",
+      "providerName": "Jansen, Luis",
+      "siteCode": "RBM",
+      "shiftDate": "2026-09-30",
+      "shiftCode": "RBM-E",
+      "summary": "Jansen, Luis (P-010) only gets 8.0 hours of rest between shifts on Tue, Sep 29 and Wed, Sep 30",
+      "detail": "RBM-N ends at 7 AM on Tue, Sep 29, and RBM-E starts at 3 PM on Wed, Sep 30. That leaves 8.0 hours of rest; the minimum is 10.",
+      "evidence": {
+        "shiftA": {
+          "key": "2026-09-29|RBM|RBM-N",
+          "shiftDate": "2026-09-29",
+          "siteCode": "RBM",
+          "shiftCode": "RBM-N",
+          "startTime": "23:00",
+          "endTime": "07:00",
+          "providerId": "P-010",
+          "providerNameRaw": "Jansen, Luis",
+          "startDateTime": "2026-09-29T23:00:00.000Z",
+          "endDateTime": "2026-09-30T07:00:00.000Z",
+          "isNight": true,
+          "durationHours": 8
+        },
+        "shiftB": {
+          "key": "2026-09-30|RBM|RBM-E",
+          "shiftDate": "2026-09-30",
+          "siteCode": "RBM",
+          "shiftCode": "RBM-E",
+          "startTime": "15:00",
+          "endTime": "23:00",
+          "providerId": "P-010",
+          "providerNameRaw": "Jansen, Luis",
+          "startDateTime": "2026-09-30T15:00:00.000Z",
+          "endDateTime": "2026-09-30T23:00:00.000Z",
+          "isNight": false,
+          "durationHours": 8
+        },
+        "gapHours": 8
+      },
+      "suggestedAction": "Push the second shift later or reassign it to give this provider a full rest period."
+    },
+    {
+      "id": "H5-008",
+      "severity": "HARD",
+      "rule": "H5",
+      "ruleName": "Minimum 10 hours off between shifts",
+      "providerId": "P-003",
+      "providerName": "Wei Chen",
+      "siteCode": "PHC",
+      "shiftDate": "2026-09-10",
+      "shiftCode": "PHC-D",
+      "summary": "Wei Chen (P-003) only gets 1.0 hours of rest between shifts on Wed, Sep 9 and Thu, Sep 10",
+      "detail": "RBM-N ends at 7 AM on Wed, Sep 9, and PHC-D starts at 8 AM on Thu, Sep 10. That leaves 1.0 hours of rest; the minimum is 10.",
+      "evidence": {
+        "shiftA": {
+          "key": "2026-09-09|RBM|RBM-N",
+          "shiftDate": "2026-09-09",
+          "siteCode": "RBM",
+          "shiftCode": "RBM-N",
+          "startTime": "23:00",
+          "endTime": "07:00",
+          "providerId": "P-003",
+          "providerNameRaw": "Wei Chen",
+          "startDateTime": "2026-09-09T23:00:00.000Z",
+          "endDateTime": "2026-09-10T07:00:00.000Z",
+          "isNight": true,
+          "durationHours": 8
+        },
+        "shiftB": {
+          "key": "2026-09-10|PHC|PHC-D",
+          "shiftDate": "2026-09-10",
+          "siteCode": "PHC",
+          "shiftCode": "PHC-D",
+          "startTime": "08:00",
+          "endTime": "20:00",
+          "providerId": "P-003",
+          "providerNameRaw": "Wei Chen",
+          "startDateTime": "2026-09-10T08:00:00.000Z",
+          "endDateTime": "2026-09-10T20:00:00.000Z",
+          "isNight": false,
+          "durationHours": 12
+        },
+        "gapHours": 1
+      },
+      "suggestedAction": "Push the second shift later or reassign it to give this provider a full rest period."
+    },
+    {
+      "id": "H5-009",
+      "severity": "HARD",
+      "rule": "H5",
+      "ruleName": "Minimum 10 hours off between shifts",
+      "providerId": "P-005",
+      "providerName": "Ellison, Tom",
+      "siteCode": "RBM",
+      "shiftDate": "2026-09-12",
+      "shiftCode": "RBM-D",
+      "summary": "Ellison, Tom (P-005) only gets 0.0 hours of rest between shifts on Fri, Sep 11 and Sat, Sep 12",
+      "detail": "RBM-N ends at 7 AM on Fri, Sep 11, and RBM-D starts at 7 AM on Sat, Sep 12. That leaves 0.0 hours of rest; the minimum is 10.",
+      "evidence": {
+        "shiftA": {
+          "key": "2026-09-11|RBM|RBM-N",
+          "shiftDate": "2026-09-11",
+          "siteCode": "RBM",
+          "shiftCode": "RBM-N",
+          "startTime": "23:00",
+          "endTime": "07:00",
+          "providerId": "P-005",
+          "providerNameRaw": "Ellison, Tom",
+          "startDateTime": "2026-09-11T23:00:00.000Z",
+          "endDateTime": "2026-09-12T07:00:00.000Z",
+          "isNight": true,
+          "durationHours": 8
+        },
+        "shiftB": {
+          "key": "2026-09-12|RBM|RBM-D",
+          "shiftDate": "2026-09-12",
+          "siteCode": "RBM",
+          "shiftCode": "RBM-D",
+          "startTime": "07:00",
+          "endTime": "17:00",
+          "providerId": "P-005",
+          "providerNameRaw": "Ellison, Tom",
+          "startDateTime": "2026-09-12T07:00:00.000Z",
+          "endDateTime": "2026-09-12T17:00:00.000Z",
+          "isNight": false,
+          "durationHours": 10
+        },
+        "gapHours": 0
+      },
+      "suggestedAction": "Push the second shift later or reassign it to give this provider a full rest period."
+    },
+    {
+      "id": "H5-010",
+      "severity": "HARD",
+      "rule": "H5",
+      "ruleName": "Minimum 10 hours off between shifts",
+      "providerId": "P-005",
+      "providerName": "Ellison, Tom",
+      "siteCode": "PHC",
+      "shiftDate": "2026-09-17",
+      "shiftCode": "PHC-D",
+      "summary": "Ellison, Tom (P-005) only gets 9.0 hours of rest between shifts on Wed, Sep 16 and Thu, Sep 17",
+      "detail": "RBM-E ends at 11 PM on Wed, Sep 16, and PHC-D starts at 8 AM on Thu, Sep 17. That leaves 9.0 hours of rest; the minimum is 10.",
+      "evidence": {
+        "shiftA": {
+          "key": "2026-09-16|RBM|RBM-E",
+          "shiftDate": "2026-09-16",
+          "siteCode": "RBM",
+          "shiftCode": "RBM-E",
+          "startTime": "15:00",
+          "endTime": "23:00",
+          "providerId": "P-005",
+          "providerNameRaw": "Ellison, Tom",
+          "startDateTime": "2026-09-16T15:00:00.000Z",
+          "endDateTime": "2026-09-16T23:00:00.000Z",
+          "isNight": false,
+          "durationHours": 8
+        },
+        "shiftB": {
+          "key": "2026-09-17|PHC|PHC-D",
+          "shiftDate": "2026-09-17",
+          "siteCode": "PHC",
+          "shiftCode": "PHC-D",
+          "startTime": "08:00",
+          "endTime": "20:00",
+          "providerId": "P-005",
+          "providerNameRaw": "Ellison, Tom",
+          "startDateTime": "2026-09-17T08:00:00.000Z",
+          "endDateTime": "2026-09-17T20:00:00.000Z",
+          "isNight": false,
+          "durationHours": 12
+        },
+        "gapHours": 9
+      },
+      "suggestedAction": "Push the second shift later or reassign it to give this provider a full rest period."
+    },
+    {
+      "id": "H5-011",
+      "severity": "HARD",
+      "rule": "H5",
+      "ruleName": "Minimum 10 hours off between shifts",
+      "providerId": "P-007",
+      "providerName": "Gupta, Anil",
+      "siteCode": "RBM",
+      "shiftDate": "2026-09-22",
+      "shiftCode": "RBM-D",
+      "summary": "Gupta, Anil (P-007) only gets 0.0 hours of rest between shifts on Mon, Sep 21 and Tue, Sep 22",
+      "detail": "RBM-N ends at 7 AM on Mon, Sep 21, and RBM-D starts at 7 AM on Tue, Sep 22. That leaves 0.0 hours of rest; the minimum is 10.",
+      "evidence": {
+        "shiftA": {
+          "key": "2026-09-21|RBM|RBM-N",
+          "shiftDate": "2026-09-21",
+          "siteCode": "RBM",
+          "shiftCode": "RBM-N",
+          "startTime": "23:00",
+          "endTime": "07:00",
+          "providerId": "P-007",
+          "providerNameRaw": "Gupta, Anil",
+          "startDateTime": "2026-09-21T23:00:00.000Z",
+          "endDateTime": "2026-09-22T07:00:00.000Z",
+          "isNight": true,
+          "durationHours": 8
+        },
+        "shiftB": {
+          "key": "2026-09-22|RBM|RBM-D",
+          "shiftDate": "2026-09-22",
+          "siteCode": "RBM",
+          "shiftCode": "RBM-D",
+          "startTime": "07:00",
+          "endTime": "17:00",
+          "providerId": "P-007",
+          "providerNameRaw": "Gupta, Anil",
+          "startDateTime": "2026-09-22T07:00:00.000Z",
+          "endDateTime": "2026-09-22T17:00:00.000Z",
+          "isNight": false,
+          "durationHours": 10
+        },
+        "gapHours": 0
+      },
+      "suggestedAction": "Push the second shift later or reassign it to give this provider a full rest period."
+    },
+    {
+      "id": "H6-012",
+      "severity": "HARD",
+      "rule": "H6",
+      "ruleName": "No more than 3 consecutive night shifts",
+      "providerId": "P-007",
+      "providerName": "Gupta, Anil",
+      "siteCode": "PHC",
+      "shiftDate": "2026-09-17",
+      "shiftCode": "PHC-N",
+      "summary": "Gupta, Anil (P-007) works 5 nights in a row, from Thu, Sep 17 through Mon, Sep 21",
+      "detail": "Nights: Thu, Sep 17 (PHC-N), Fri, Sep 18 (RBM-N), Sat, Sep 19 (RBM-N), Sun, Sep 20 (RBM-N), Mon, Sep 21 (RBM-N). The cap is 3 nights in a row.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-17|PHC|PHC-N",
+            "shiftDate": "2026-09-17",
+            "siteCode": "PHC",
+            "shiftCode": "PHC-N",
+            "startTime": "20:00",
+            "endTime": "08:00",
+            "providerId": "P-007",
+            "providerNameRaw": "Gupta, Anil",
+            "startDateTime": "2026-09-17T20:00:00.000Z",
+            "endDateTime": "2026-09-18T08:00:00.000Z",
+            "isNight": true,
+            "durationHours": 12
+          },
+          {
+            "key": "2026-09-18|RBM|RBM-N",
+            "shiftDate": "2026-09-18",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-007",
+            "providerNameRaw": "Gupta, Anil",
+            "startDateTime": "2026-09-18T23:00:00.000Z",
+            "endDateTime": "2026-09-19T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          },
+          {
+            "key": "2026-09-19|RBM|RBM-N",
+            "shiftDate": "2026-09-19",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-007",
+            "providerNameRaw": "Gupta, Anil",
+            "startDateTime": "2026-09-19T23:00:00.000Z",
+            "endDateTime": "2026-09-20T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          },
+          {
+            "key": "2026-09-20|RBM|RBM-N",
+            "shiftDate": "2026-09-20",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-007",
+            "providerNameRaw": "Gupta, Anil",
+            "startDateTime": "2026-09-20T23:00:00.000Z",
+            "endDateTime": "2026-09-21T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          },
+          {
+            "key": "2026-09-21|RBM|RBM-N",
+            "shiftDate": "2026-09-21",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-007",
+            "providerNameRaw": "Gupta, Anil",
+            "startDateTime": "2026-09-21T23:00:00.000Z",
+            "endDateTime": "2026-09-22T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          }
+        ]
+      },
+      "suggestedAction": "Break this run after 3 nights; reassign the remaining 2 night shift(s) to someone else."
+    },
+    {
+      "id": "H7-013",
+      "severity": "HARD",
+      "rule": "H7",
+      "ruleName": "No shift during approved leave",
+      "providerId": "P-002",
+      "providerName": "Bhatt, Priya",
+      "siteCode": "RBM",
+      "shiftDate": "2026-09-24",
+      "shiftCode": "RBM-D",
+      "summary": "Bhatt, Priya (P-002) is scheduled for RBM-D on Thu, Sep 24, inside their approved PTO (Tue, Sep 22 to Sat, Sep 26)",
+      "detail": "Approved leave window: Tue, Sep 22 to Sat, Sep 26 (PTO).",
+      "evidence": {
+        "scheduleRow": {
+          "key": "2026-09-24|RBM|RBM-D",
+          "shiftDate": "2026-09-24",
+          "siteCode": "RBM",
+          "shiftCode": "RBM-D",
+          "startTime": "07:00",
+          "endTime": "17:00",
+          "providerId": "P-002",
+          "providerNameRaw": "Bhatt, Priya",
+          "startDateTime": "2026-09-24T07:00:00.000Z",
+          "endDateTime": "2026-09-24T17:00:00.000Z",
+          "isNight": false,
+          "durationHours": 10
+        },
+        "leave": {
+          "providerId": "P-002",
+          "leaveStart": "2026-09-22",
+          "leaveEnd": "2026-09-26",
+          "leaveType": "PTO"
+        }
+      },
+      "suggestedAction": "Remove this shift from the provider and reassign coverage."
+    },
+    {
+      "id": "H8-014",
+      "severity": "HARD",
+      "rule": "H8",
+      "ruleName": "Assigned load within target band",
+      "providerId": "P-001",
+      "providerName": "Arnold, Marcus",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "Arnold, Marcus (P-001) is under target: 13 shifts assigned, band is 15 ± 1 shift",
+      "detail": "Target type: SHIFTS. Allowed range: 14 to 16.",
+      "evidence": {
+        "actual": 13,
+        "low": 14,
+        "high": 16,
+        "targetType": "SHIFTS",
+        "targetValue": 15
+      },
+      "suggestedAction": "Add shifts for this provider, or confirm the target is still correct."
+    },
+    {
+      "id": "H8-015",
+      "severity": "HARD",
+      "rule": "H8",
+      "ruleName": "Assigned load within target band",
+      "providerId": "P-004",
+      "providerName": "Delgado, Rosa",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "Delgado, Rosa (P-004) is under target: 8 shifts assigned, band is 10 ± 1 shift",
+      "detail": "Target type: SHIFTS. Allowed range: 9 to 11.",
+      "evidence": {
+        "actual": 8,
+        "low": 9,
+        "high": 11,
+        "targetType": "SHIFTS",
+        "targetValue": 10
+      },
+      "suggestedAction": "Add shifts for this provider, or confirm the target is still correct."
+    },
+    {
+      "id": "H8-017",
+      "severity": "HARD",
+      "rule": "H8",
+      "ruleName": "Assigned load within target band",
+      "providerId": "P-006",
+      "providerName": "Farouk, Nadia",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "Farouk, Nadia (P-006) is over target: 168h assigned, band is 132h ± 8h",
+      "detail": "Target type: HOURS. Allowed range: 124 to 140.",
+      "evidence": {
+        "actual": 168,
+        "low": 124,
+        "high": 140,
+        "targetType": "HOURS",
+        "targetValue": 132
+      },
+      "suggestedAction": "Move some of this provider’s shifts to someone under target."
+    },
+    {
+      "id": "H8-018",
+      "severity": "HARD",
+      "rule": "H8",
+      "ruleName": "Assigned load within target band",
+      "providerId": "P-009",
+      "providerName": "beth iverson",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "beth iverson (P-009) is over target: 146h assigned, band is 120h ± 8h",
+      "detail": "Target type: HOURS. Allowed range: 112 to 128.",
+      "evidence": {
+        "actual": 146,
+        "low": 112,
+        "high": 128,
+        "targetType": "HOURS",
+        "targetValue": 120
+      },
+      "suggestedAction": "Move some of this provider’s shifts to someone under target."
+    },
+    {
+      "id": "H8-019",
+      "severity": "HARD",
+      "rule": "H8",
+      "ruleName": "Assigned load within target band",
+      "providerId": "P-010",
+      "providerName": "Jansen, Luis",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "Jansen, Luis (P-010) is over target: 18 shifts assigned, band is 14 ± 1 shift",
+      "detail": "Target type: SHIFTS. Allowed range: 13 to 15.",
+      "evidence": {
+        "actual": 18,
+        "low": 13,
+        "high": 15,
+        "targetType": "SHIFTS",
+        "targetValue": 14
+      },
+      "suggestedAction": "Move some of this provider’s shifts to someone under target."
+    },
+    {
+      "id": "H9-020",
+      "severity": "HARD",
+      "rule": "H9",
+      "ruleName": "Minimum 12 shifts per period (benefits eligibility floor)",
+      "providerId": "P-004",
+      "providerName": "Delgado, Rosa",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "Delgado, Rosa (P-004) has only 8 shifts this period; floor is 12",
+      "detail": "This is a benefits eligibility floor and applies regardless of this provider's target type.",
+      "evidence": {
+        "assignedShiftCount": 8
+      },
+      "suggestedAction": "Add shifts to bring this provider up to at least 12."
+    },
+    {
+      "id": "S1-001",
+      "severity": "SOFT",
+      "rule": "S1",
+      "ruleName": "Honor stated preferences",
+      "providerId": "P-003",
+      "providerName": "Wei Chen",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "Wei Chen (P-003) asked for Tue, Sep 15 off but is scheduled RBM-D",
+      "detail": "Requested day off on Tue, Sep 15. Preference: \"Daughter's surgery. Cannot work.\". Keep this provider off entirely on 2026-09-15.",
+      "evidence": {
+        "date": "2026-09-15",
+        "scheduledShifts": [
+          {
+            "key": "2026-09-15|RBM|RBM-D",
+            "shiftDate": "2026-09-15",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-D",
+            "startTime": "07:00",
+            "endTime": "17:00",
+            "providerId": "P-003",
+            "providerNameRaw": "Wei Chen",
+            "startDateTime": "2026-09-15T07:00:00.000Z",
+            "endDateTime": "2026-09-15T17:00:00.000Z",
+            "isNight": false,
+            "durationHours": 10
+          }
+        ],
+        "preferencePriority": "RED",
+        "interpreted": {
+          "providerId": "P-003",
+          "priority": "RED",
+          "noteRaw": "Daughter's surgery. Cannot work.",
+          "appliesToRaw": "2026-09-15",
+          "constraintType": "DAY_OFF",
+          "params": {
+            "date": "2026-09-15"
+          },
+          "plainEnglish": "Keep this provider off entirely on 2026-09-15.",
+          "confidence": "high"
+        }
+      },
+      "suggestedAction": "RED is a hardship request: only break it if nothing else works. Re-check whether another provider can cover."
+    },
+    {
+      "id": "S1-002",
+      "severity": "SOFT",
+      "rule": "S1",
+      "ruleName": "Honor stated preferences",
+      "providerId": "P-001",
+      "providerName": "Arnold, Marcus",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "Arnold, Marcus (P-001) asked for Sat, Sep 12 off but is scheduled PHC-D",
+      "detail": "Requested day off on Sat, Sep 12. Preference: \"Out of state wedding.\". Keep this provider off entirely on 2026-09-12.",
+      "evidence": {
+        "date": "2026-09-12",
+        "scheduledShifts": [
+          {
+            "key": "2026-09-12|PHC|PHC-D",
+            "shiftDate": "2026-09-12",
+            "siteCode": "PHC",
+            "shiftCode": "PHC-D",
+            "startTime": "08:00",
+            "endTime": "20:00",
+            "providerId": "P-001",
+            "providerNameRaw": "Dr Arnold Arnold",
+            "startDateTime": "2026-09-12T08:00:00.000Z",
+            "endDateTime": "2026-09-12T20:00:00.000Z",
+            "isNight": false,
+            "durationHours": 12
+          }
+        ],
+        "preferencePriority": "RED",
+        "interpreted": {
+          "providerId": "P-001",
+          "priority": "RED",
+          "noteRaw": "Out of state wedding.",
+          "appliesToRaw": "2026-09-12",
+          "constraintType": "DAY_OFF",
+          "params": {
+            "date": "2026-09-12"
+          },
+          "plainEnglish": "Keep this provider off entirely on 2026-09-12.",
+          "confidence": "high"
+        }
+      },
+      "suggestedAction": "RED is a hardship request: only break it if nothing else works. Re-check whether another provider can cover."
+    },
+    {
+      "id": "S1-004",
+      "severity": "SOFT",
+      "rule": "S1",
+      "ruleName": "Honor stated preferences",
+      "providerId": "P-004",
+      "providerName": "Delgado, Rosa",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "Delgado, Rosa (P-004) has a standing \"no overnight shifts\" agreement but is scheduled for 1 night shift(s): Tue, Sep 15",
+      "detail": "Standing no-nights agreement. Preference: \"No overnight shifts - protected per group agreement.\". Never schedule this provider for a night shift.",
+      "evidence": {
+        "scheduledShifts": [
+          {
+            "key": "2026-09-15|PHC|PHC-N",
+            "shiftDate": "2026-09-15",
+            "siteCode": "PHC",
+            "shiftCode": "PHC-N",
+            "startTime": "20:00",
+            "endTime": "08:00",
+            "providerId": "P-004",
+            "providerNameRaw": "Delgado, Rosa",
+            "startDateTime": "2026-09-15T20:00:00.000Z",
+            "endDateTime": "2026-09-16T08:00:00.000Z",
+            "isNight": true,
+            "durationHours": 12
+          }
+        ],
+        "preferencePriority": "RED",
+        "interpreted": {
+          "providerId": "P-004",
+          "priority": "RED",
+          "noteRaw": "No overnight shifts - protected per group agreement.",
+          "appliesToRaw": "recurring",
+          "constraintType": "AVOID_NIGHT_SHIFTS",
+          "params": {},
+          "plainEnglish": "Never schedule this provider for a night shift.",
+          "confidence": "high"
+        }
+      },
+      "suggestedAction": "RED is a hardship request: only break it if nothing else works. Re-check whether another provider can cover."
+    },
+    {
+      "id": "S1-003",
+      "severity": "SOFT",
+      "rule": "S1",
+      "ruleName": "Honor stated preferences",
+      "providerId": "P-010",
+      "providerName": "Jansen, Luis",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "Jansen, Luis (P-010) asked for no more than 2 nights in a row but has 3 in a row (Mon, Sep 21 to Wed, Sep 23)",
+      "detail": "Personal cap of 2 consecutive nights (stricter than the group's 3-night hard limit). Preference: \"Prefers no more than 2 nights in a row.\". Cap night runs at 2 in a row for this provider (stricter than the group's 3-night hard cap).",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-21|PHC|PHC-N",
+            "shiftDate": "2026-09-21",
+            "siteCode": "PHC",
+            "shiftCode": "PHC-N",
+            "startTime": "20:00",
+            "endTime": "08:00",
+            "providerId": "P-010",
+            "providerNameRaw": "Jansen, Luis",
+            "startDateTime": "2026-09-21T20:00:00.000Z",
+            "endDateTime": "2026-09-22T08:00:00.000Z",
+            "isNight": true,
+            "durationHours": 12
+          },
+          {
+            "key": "2026-09-22|PHC|PHC-N",
+            "shiftDate": "2026-09-22",
+            "siteCode": "PHC",
+            "shiftCode": "PHC-N",
+            "startTime": "20:00",
+            "endTime": "08:00",
+            "providerId": "P-010",
+            "providerNameRaw": "Jansen, Luis",
+            "startDateTime": "2026-09-22T20:00:00.000Z",
+            "endDateTime": "2026-09-23T08:00:00.000Z",
+            "isNight": true,
+            "durationHours": 12
+          },
+          {
+            "key": "2026-09-23|PHC|PHC-N",
+            "shiftDate": "2026-09-23",
+            "siteCode": "PHC",
+            "shiftCode": "PHC-N",
+            "startTime": "20:00",
+            "endTime": "08:00",
+            "providerId": "P-010",
+            "providerNameRaw": "Jansen, Luis",
+            "startDateTime": "2026-09-23T20:00:00.000Z",
+            "endDateTime": "2026-09-24T08:00:00.000Z",
+            "isNight": true,
+            "durationHours": 12
+          }
+        ],
+        "preferencePriority": "YELLOW",
+        "interpreted": {
+          "providerId": "P-010",
+          "priority": "YELLOW",
+          "noteRaw": "Prefers no more than 2 nights in a row.",
+          "appliesToRaw": "recurring",
+          "constraintType": "MAX_CONSECUTIVE_NIGHTS",
+          "params": {
+            "max": 2
+          },
+          "plainEnglish": "Cap night runs at 2 in a row for this provider (stricter than the group's 3-night hard cap).",
+          "confidence": "high"
+        }
+      },
+      "suggestedAction": "Swap this shift with another provider if the schedule allows it."
+    },
+    {
+      "id": "S1-006",
+      "severity": "SOFT",
+      "rule": "S1",
+      "ruleName": "Honor stated preferences",
+      "providerId": "P-008",
+      "providerName": "Halvorsen, Kai",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "Halvorsen, Kai (P-008) asked for no nights between Sun, Sep 20 and Sat, Sep 26 but is scheduled RBM-N on Fri, Sep 25",
+      "detail": "Requested no nights in this window. Preference: \"No nights the week of the 20th, ish.\". No night shifts for this provider between 2026-09-20 and 2026-09-26. (Note says \"ish\": dates read as the Sun through Sat week containing the 20th (2026-09-20 to 2026-09-26); confirm with the provider if this is off by a few days.)",
+      "evidence": {
+        "start": "2026-09-20",
+        "end": "2026-09-26",
+        "scheduledShifts": [
+          {
+            "key": "2026-09-25|RBM|RBM-N",
+            "shiftDate": "2026-09-25",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-008",
+            "providerNameRaw": "Halvorsen, Kai",
+            "startDateTime": "2026-09-25T23:00:00.000Z",
+            "endDateTime": "2026-09-26T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          }
+        ],
+        "preferencePriority": "YELLOW",
+        "interpreted": {
+          "providerId": "P-008",
+          "priority": "YELLOW",
+          "noteRaw": "No nights the week of the 20th, ish.",
+          "appliesToRaw": "recurring",
+          "constraintType": "AVOID_NIGHTS_IN_RANGE",
+          "params": {
+            "start": "2026-09-20",
+            "end": "2026-09-26"
+          },
+          "plainEnglish": "No night shifts for this provider between 2026-09-20 and 2026-09-26.",
+          "confidence": "fuzzy",
+          "fuzzyNote": "Note says \"ish\": dates read as the Sun through Sat week containing the 20th (2026-09-20 to 2026-09-26); confirm with the provider if this is off by a few days."
+        }
+      },
+      "suggestedAction": "Swap this shift with another provider if the schedule allows it."
+    },
+    {
+      "id": "S1-007",
+      "severity": "SOFT",
+      "rule": "S1",
+      "ruleName": "Honor stated preferences",
+      "providerId": "P-007",
+      "providerName": "Gupta, Anil",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "Gupta, Anil (P-007) asked for the Sat, Sep 19/Sun, Sep 20 weekend off but is scheduled RBM-N on Sat, Sep 19, RBM-N on Sun, Sep 20",
+      "detail": "Requested that weekend off. Preference: \"Would like the weekend off if it works out.\". Keep this provider off both 2026-09-19 and 2026-09-20.",
+      "evidence": {
+        "saturday": "2026-09-19",
+        "sunday": "2026-09-20",
+        "scheduledShifts": [
+          {
+            "key": "2026-09-19|RBM|RBM-N",
+            "shiftDate": "2026-09-19",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-007",
+            "providerNameRaw": "Gupta, Anil",
+            "startDateTime": "2026-09-19T23:00:00.000Z",
+            "endDateTime": "2026-09-20T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          },
+          {
+            "key": "2026-09-20|RBM|RBM-N",
+            "shiftDate": "2026-09-20",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-007",
+            "providerNameRaw": "Gupta, Anil",
+            "startDateTime": "2026-09-20T23:00:00.000Z",
+            "endDateTime": "2026-09-21T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          }
+        ],
+        "preferencePriority": "YELLOW",
+        "interpreted": {
+          "providerId": "P-007",
+          "priority": "YELLOW",
+          "noteRaw": "Would like the weekend off if it works out.",
+          "appliesToRaw": "2026-09-19",
+          "constraintType": "WEEKEND_OFF",
+          "params": {
+            "saturday": "2026-09-19",
+            "sunday": "2026-09-20"
+          },
+          "plainEnglish": "Keep this provider off both 2026-09-19 and 2026-09-20.",
+          "confidence": "high"
+        }
+      },
+      "suggestedAction": "Swap this shift with another provider if the schedule allows it."
+    },
+    {
+      "id": "S1-005",
+      "severity": "SOFT",
+      "rule": "S1",
+      "ruleName": "Honor stated preferences",
+      "providerId": "P-002",
+      "providerName": "Bhatt, Priya",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "Bhatt, Priya (P-002) prefers day shifts between Sun, Sep 6 and Sat, Sep 12 but has RBM-E on Sat, Sep 12",
+      "detail": "Preferred day shifts in this window. Preference: \"Prefers day shifts this week.\". Prefer day shifts (not evening/night) for this provider between 2026-09-06 and 2026-09-12.",
+      "evidence": {
+        "start": "2026-09-06",
+        "end": "2026-09-12",
+        "scheduledShifts": [
+          {
+            "key": "2026-09-12|RBM|RBM-E",
+            "shiftDate": "2026-09-12",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-E",
+            "startTime": "15:00",
+            "endTime": "23:00",
+            "providerId": "P-002",
+            "providerNameRaw": "Bhatt, Priya",
+            "startDateTime": "2026-09-12T15:00:00.000Z",
+            "endDateTime": "2026-09-12T23:00:00.000Z",
+            "isNight": false,
+            "durationHours": 8
+          }
+        ],
+        "preferencePriority": "GREEN",
+        "interpreted": {
+          "providerId": "P-002",
+          "priority": "GREEN",
+          "noteRaw": "Prefers day shifts this week.",
+          "appliesToRaw": "2026-09-11",
+          "constraintType": "PREFER_DAY_SHIFTS_IN_RANGE",
+          "params": {
+            "start": "2026-09-06",
+            "end": "2026-09-12"
+          },
+          "plainEnglish": "Prefer day shifts (not evening/night) for this provider between 2026-09-06 and 2026-09-12.",
+          "confidence": "high"
+        }
+      },
+      "suggestedAction": "Swap this shift with another provider if the schedule allows it."
+    },
+    {
+      "id": "S1-008",
+      "severity": "SOFT",
+      "rule": "S1",
+      "ruleName": "Honor stated preferences",
+      "providerId": "P-009",
+      "providerName": "beth iverson",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "beth iverson (P-009) prefers PHC over RBM. Currently 8 PHC vs 6 RBM shifts (informational; can't tell from the data whether RBM assignments were unavoidable for coverage)",
+      "detail": "\"Prefers PHC over RBM when there's a choice.\"",
+      "evidence": {
+        "preferredSite": "PHC",
+        "overSite": "RBM",
+        "preferredCount": 8,
+        "otherCount": 6,
+        "preferencePriority": "GREEN",
+        "interpreted": {
+          "providerId": "P-009",
+          "priority": "GREEN",
+          "noteRaw": "Prefers PHC over RBM when there's a choice.",
+          "appliesToRaw": "recurring",
+          "constraintType": "PREFER_SITE",
+          "params": {
+            "preferredSite": "PHC",
+            "overSite": "RBM"
+          },
+          "plainEnglish": "Give this provider PHC shifts over RBM when both are viable.",
+          "confidence": "high"
+        }
+      },
+      "suggestedAction": "No action needed. The split already favors the preferred site."
+    },
+    {
+      "id": "S2-009",
+      "severity": "SOFT",
+      "rule": "S2",
+      "ruleName": "Distribute night shifts equitably, scaled to target load",
+      "providerId": "P-002",
+      "providerName": "Bhatt, Priya",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "Bhatt, Priya (P-002) is scheduled for 3 night shift(s), well below the night-eligible group average of 7.1",
+      "detail": "Night-eligible physicians in this period: Arnold, Marcus, Bhatt, Priya, Wei Chen, Ellison, Tom, Farouk, Nadia, Gupta, Anil, Jansen, Luis.",
+      "evidence": {
+        "nightCount": 3,
+        "groupAverage": 7.142857142857143,
+        "poolSize": 7
+      },
+      "suggestedAction": "This provider has room to pick up more night shifts if others are overloaded."
+    },
+    {
+      "id": "S2-010",
+      "severity": "SOFT",
+      "rule": "S2",
+      "ruleName": "Distribute night shifts equitably, scaled to target load",
+      "providerId": "P-007",
+      "providerName": "Gupta, Anil",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "Gupta, Anil (P-007) is scheduled for 13 night shift(s), well above the night-eligible group average of 7.1",
+      "detail": "Night-eligible physicians in this period: Arnold, Marcus, Bhatt, Priya, Wei Chen, Ellison, Tom, Farouk, Nadia, Gupta, Anil, Jansen, Luis.",
+      "evidence": {
+        "nightCount": 13,
+        "groupAverage": 7.142857142857143,
+        "poolSize": 7
+      },
+      "suggestedAction": "Move some of this provider’s night shifts to a night-eligible physician with fewer nights."
+    },
+    {
+      "id": "S3-011",
+      "severity": "SOFT",
+      "rule": "S3",
+      "ruleName": "Avoid island nights",
+      "providerId": "P-004",
+      "providerName": "Delgado, Rosa",
+      "siteCode": "PHC",
+      "shiftDate": "2026-09-15",
+      "shiftCode": "PHC-N",
+      "summary": "Delgado, Rosa (P-004) has a single, isolated night shift on Tue, Sep 15 (PHC-N), not adjacent to another night",
+      "detail": "Night blocks of 2–3 are the norm and preferred; a lone night shift is disruptive to sleep and is what S3 flags.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-15|PHC|PHC-N",
+            "shiftDate": "2026-09-15",
+            "siteCode": "PHC",
+            "shiftCode": "PHC-N",
+            "startTime": "20:00",
+            "endTime": "08:00",
+            "providerId": "P-004",
+            "providerNameRaw": "Delgado, Rosa",
+            "startDateTime": "2026-09-15T20:00:00.000Z",
+            "endDateTime": "2026-09-16T08:00:00.000Z",
+            "isNight": true,
+            "durationHours": 12
+          }
+        ]
+      },
+      "suggestedAction": "Pair this with an adjacent night shift, or move it to someone already working a night block nearby."
+    },
+    {
+      "id": "S3-012",
+      "severity": "SOFT",
+      "rule": "S3",
+      "ruleName": "Avoid island nights",
+      "providerId": "P-006",
+      "providerName": "Farouk, Nadia",
+      "siteCode": "PHC",
+      "shiftDate": "2026-09-07",
+      "shiftCode": "PHC-N",
+      "summary": "Farouk, Nadia (P-006) has a single, isolated night shift on Mon, Sep 7 (PHC-N), not adjacent to another night",
+      "detail": "Night blocks of 2–3 are the norm and preferred; a lone night shift is disruptive to sleep and is what S3 flags.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-07|PHC|PHC-N",
+            "shiftDate": "2026-09-07",
+            "siteCode": "PHC",
+            "shiftCode": "PHC-N",
+            "startTime": "20:00",
+            "endTime": "08:00",
+            "providerId": "P-006",
+            "providerNameRaw": "Farouk, Nadia",
+            "startDateTime": "2026-09-07T20:00:00.000Z",
+            "endDateTime": "2026-09-08T08:00:00.000Z",
+            "isNight": true,
+            "durationHours": 12
+          }
+        ]
+      },
+      "suggestedAction": "Pair this with an adjacent night shift, or move it to someone already working a night block nearby."
+    },
+    {
+      "id": "S3-013",
+      "severity": "SOFT",
+      "rule": "S3",
+      "ruleName": "Avoid island nights",
+      "providerId": "P-006",
+      "providerName": "Farouk, Nadia",
+      "siteCode": "PHC",
+      "shiftDate": "2026-09-09",
+      "shiftCode": "PHC-N",
+      "summary": "Farouk, Nadia (P-006) has a single, isolated night shift on Wed, Sep 9 (PHC-N), not adjacent to another night",
+      "detail": "Night blocks of 2–3 are the norm and preferred; a lone night shift is disruptive to sleep and is what S3 flags.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-09|PHC|PHC-N",
+            "shiftDate": "2026-09-09",
+            "siteCode": "PHC",
+            "shiftCode": "PHC-N",
+            "startTime": "20:00",
+            "endTime": "08:00",
+            "providerId": "P-006",
+            "providerNameRaw": "Farouk, Nadia",
+            "startDateTime": "2026-09-09T20:00:00.000Z",
+            "endDateTime": "2026-09-10T08:00:00.000Z",
+            "isNight": true,
+            "durationHours": 12
+          }
+        ]
+      },
+      "suggestedAction": "Pair this with an adjacent night shift, or move it to someone already working a night block nearby."
+    },
+    {
+      "id": "S3-014",
+      "severity": "SOFT",
+      "rule": "S3",
+      "ruleName": "Avoid island nights",
+      "providerId": "P-006",
+      "providerName": "Farouk, Nadia",
+      "siteCode": "PHC",
+      "shiftDate": "2026-09-18",
+      "shiftCode": "PHC-N",
+      "summary": "Farouk, Nadia (P-006) has a single, isolated night shift on Fri, Sep 18 (PHC-N), not adjacent to another night",
+      "detail": "Night blocks of 2–3 are the norm and preferred; a lone night shift is disruptive to sleep and is what S3 flags.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-18|PHC|PHC-N",
+            "shiftDate": "2026-09-18",
+            "siteCode": "PHC",
+            "shiftCode": "PHC-N",
+            "startTime": "20:00",
+            "endTime": "08:00",
+            "providerId": "P-006",
+            "providerNameRaw": "Farouk, Nadia",
+            "startDateTime": "2026-09-18T20:00:00.000Z",
+            "endDateTime": "2026-09-19T08:00:00.000Z",
+            "isNight": true,
+            "durationHours": 12
+          }
+        ]
+      },
+      "suggestedAction": "Pair this with an adjacent night shift, or move it to someone already working a night block nearby."
+    },
+    {
+      "id": "S3-015",
+      "severity": "SOFT",
+      "rule": "S3",
+      "ruleName": "Avoid island nights",
+      "providerId": "P-008",
+      "providerName": "Halvorsen, Kai",
+      "siteCode": "RBM",
+      "shiftDate": "2026-09-25",
+      "shiftCode": "RBM-N",
+      "summary": "Halvorsen, Kai (P-008) has a single, isolated night shift on Fri, Sep 25 (RBM-N), not adjacent to another night",
+      "detail": "Night blocks of 2–3 are the norm and preferred; a lone night shift is disruptive to sleep and is what S3 flags.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-25|RBM|RBM-N",
+            "shiftDate": "2026-09-25",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-008",
+            "providerNameRaw": "Halvorsen, Kai",
+            "startDateTime": "2026-09-25T23:00:00.000Z",
+            "endDateTime": "2026-09-26T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          }
+        ]
+      },
+      "suggestedAction": "Pair this with an adjacent night shift, or move it to someone already working a night block nearby."
+    },
+    {
+      "id": "S3-016",
+      "severity": "SOFT",
+      "rule": "S3",
+      "ruleName": "Avoid island nights",
+      "providerId": "P-001",
+      "providerName": "Arnold, Marcus",
+      "siteCode": "PHC",
+      "shiftDate": "2026-09-08",
+      "shiftCode": "PHC-N",
+      "summary": "Arnold, Marcus (P-001) has a single, isolated night shift on Tue, Sep 8 (PHC-N), not adjacent to another night",
+      "detail": "Night blocks of 2–3 are the norm and preferred; a lone night shift is disruptive to sleep and is what S3 flags.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-08|PHC|PHC-N",
+            "shiftDate": "2026-09-08",
+            "siteCode": "PHC",
+            "shiftCode": "PHC-N",
+            "startTime": "20:00",
+            "endTime": "08:00",
+            "providerId": "P-001",
+            "providerNameRaw": "Arnold, Marcus",
+            "startDateTime": "2026-09-08T20:00:00.000Z",
+            "endDateTime": "2026-09-09T08:00:00.000Z",
+            "isNight": true,
+            "durationHours": 12
+          }
+        ]
+      },
+      "suggestedAction": "Pair this with an adjacent night shift, or move it to someone already working a night block nearby."
+    },
+    {
+      "id": "S3-017",
+      "severity": "SOFT",
+      "rule": "S3",
+      "ruleName": "Avoid island nights",
+      "providerId": "P-001",
+      "providerName": "Arnold, Marcus",
+      "siteCode": "PHC",
+      "shiftDate": "2026-09-14",
+      "shiftCode": "PHC-N",
+      "summary": "Arnold, Marcus (P-001) has a single, isolated night shift on Mon, Sep 14 (PHC-N), not adjacent to another night",
+      "detail": "Night blocks of 2–3 are the norm and preferred; a lone night shift is disruptive to sleep and is what S3 flags.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-14|PHC|PHC-N",
+            "shiftDate": "2026-09-14",
+            "siteCode": "PHC",
+            "shiftCode": "PHC-N",
+            "startTime": "20:00",
+            "endTime": "08:00",
+            "providerId": "P-001",
+            "providerNameRaw": "Arnold, Marcus",
+            "startDateTime": "2026-09-14T20:00:00.000Z",
+            "endDateTime": "2026-09-15T08:00:00.000Z",
+            "isNight": true,
+            "durationHours": 12
+          }
+        ]
+      },
+      "suggestedAction": "Pair this with an adjacent night shift, or move it to someone already working a night block nearby."
+    },
+    {
+      "id": "S3-018",
+      "severity": "SOFT",
+      "rule": "S3",
+      "ruleName": "Avoid island nights",
+      "providerId": "P-001",
+      "providerName": "Arnold, Marcus",
+      "siteCode": "PHC",
+      "shiftDate": "2026-09-16",
+      "shiftCode": "PHC-N",
+      "summary": "Arnold, Marcus (P-001) has a single, isolated night shift on Wed, Sep 16 (PHC-N), not adjacent to another night",
+      "detail": "Night blocks of 2–3 are the norm and preferred; a lone night shift is disruptive to sleep and is what S3 flags.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-16|PHC|PHC-N",
+            "shiftDate": "2026-09-16",
+            "siteCode": "PHC",
+            "shiftCode": "PHC-N",
+            "startTime": "20:00",
+            "endTime": "08:00",
+            "providerId": "P-001",
+            "providerNameRaw": "Arnold, Marcus",
+            "startDateTime": "2026-09-16T20:00:00.000Z",
+            "endDateTime": "2026-09-17T08:00:00.000Z",
+            "isNight": true,
+            "durationHours": 12
+          }
+        ]
+      },
+      "suggestedAction": "Pair this with an adjacent night shift, or move it to someone already working a night block nearby."
+    },
+    {
+      "id": "S3-019",
+      "severity": "SOFT",
+      "rule": "S3",
+      "ruleName": "Avoid island nights",
+      "providerId": "P-010",
+      "providerName": "Jansen, Luis",
+      "siteCode": "PHC",
+      "shiftDate": "2026-09-04",
+      "shiftCode": "PHC-N",
+      "summary": "Jansen, Luis (P-010) has a single, isolated night shift on Fri, Sep 4 (PHC-N), not adjacent to another night",
+      "detail": "Night blocks of 2–3 are the norm and preferred; a lone night shift is disruptive to sleep and is what S3 flags.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-04|PHC|PHC-N",
+            "shiftDate": "2026-09-04",
+            "siteCode": "PHC",
+            "shiftCode": "PHC-N",
+            "startTime": "20:00",
+            "endTime": "08:00",
+            "providerId": "P-010",
+            "providerNameRaw": "Jansen, Luis",
+            "startDateTime": "2026-09-04T20:00:00.000Z",
+            "endDateTime": "2026-09-05T08:00:00.000Z",
+            "isNight": true,
+            "durationHours": 12
+          }
+        ]
+      },
+      "suggestedAction": "Pair this with an adjacent night shift, or move it to someone already working a night block nearby."
+    },
+    {
+      "id": "S3-020",
+      "severity": "SOFT",
+      "rule": "S3",
+      "ruleName": "Avoid island nights",
+      "providerId": "P-010",
+      "providerName": "Jansen, Luis",
+      "siteCode": "RBM",
+      "shiftDate": "2026-09-06",
+      "shiftCode": "RBM-N",
+      "summary": "Jansen, Luis (P-010) has a single, isolated night shift on Sun, Sep 6 (RBM-N), not adjacent to another night",
+      "detail": "Night blocks of 2–3 are the norm and preferred; a lone night shift is disruptive to sleep and is what S3 flags.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-06|RBM|RBM-N",
+            "shiftDate": "2026-09-06",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-010",
+            "providerNameRaw": "Jansen, Luis",
+            "startDateTime": "2026-09-06T23:00:00.000Z",
+            "endDateTime": "2026-09-07T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          }
+        ]
+      },
+      "suggestedAction": "Pair this with an adjacent night shift, or move it to someone already working a night block nearby."
+    },
+    {
+      "id": "S3-021",
+      "severity": "SOFT",
+      "rule": "S3",
+      "ruleName": "Avoid island nights",
+      "providerId": "P-010",
+      "providerName": "Jansen, Luis",
+      "siteCode": "RBM",
+      "shiftDate": "2026-09-12",
+      "shiftCode": "RBM-N",
+      "summary": "Jansen, Luis (P-010) has a single, isolated night shift on Sat, Sep 12 (RBM-N), not adjacent to another night",
+      "detail": "Night blocks of 2–3 are the norm and preferred; a lone night shift is disruptive to sleep and is what S3 flags.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-12|RBM|RBM-N",
+            "shiftDate": "2026-09-12",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-010",
+            "providerNameRaw": "Jansen, Luis",
+            "startDateTime": "2026-09-12T23:00:00.000Z",
+            "endDateTime": "2026-09-13T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          }
+        ]
+      },
+      "suggestedAction": "Pair this with an adjacent night shift, or move it to someone already working a night block nearby."
+    },
+    {
+      "id": "S3-022",
+      "severity": "SOFT",
+      "rule": "S3",
+      "ruleName": "Recovery day after a night block",
+      "providerId": "P-010",
+      "providerName": "Jansen, Luis",
+      "siteCode": "RBM",
+      "shiftDate": "2026-09-30",
+      "shiftCode": "RBM-E",
+      "summary": "Jansen, Luis (P-010) is scheduled on Wed, Sep 30, the day right after a 2-night block (Mon, Sep 28 to Tue, Sep 29)",
+      "detail": "The group's own notes treat the day after a night block as a recovery day providers expect off.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-28|RBM|RBM-N",
+            "shiftDate": "2026-09-28",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-010",
+            "providerNameRaw": "Jansen, Luis",
+            "startDateTime": "2026-09-28T23:00:00.000Z",
+            "endDateTime": "2026-09-29T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          },
+          {
+            "key": "2026-09-29|RBM|RBM-N",
+            "shiftDate": "2026-09-29",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-010",
+            "providerNameRaw": "Jansen, Luis",
+            "startDateTime": "2026-09-29T23:00:00.000Z",
+            "endDateTime": "2026-09-30T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          }
+        ],
+        "recoveryDay": "2026-09-30",
+        "scheduledOnRecoveryDay": [
+          {
+            "key": "2026-09-30|RBM|RBM-E",
+            "shiftDate": "2026-09-30",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-E",
+            "startTime": "15:00",
+            "endTime": "23:00",
+            "providerId": "P-010",
+            "providerNameRaw": "Jansen, Luis",
+            "startDateTime": "2026-09-30T15:00:00.000Z",
+            "endDateTime": "2026-09-30T23:00:00.000Z",
+            "isNight": false,
+            "durationHours": 8
+          }
+        ]
+      },
+      "suggestedAction": "Give this provider the day after the night block off; reassign the recovery-day shift."
+    },
+    {
+      "id": "S3-023",
+      "severity": "SOFT",
+      "rule": "S3",
+      "ruleName": "Avoid island nights",
+      "providerId": "P-002",
+      "providerName": "Bhatt, Priya",
+      "siteCode": "RBM",
+      "shiftDate": "2026-09-30",
+      "shiftCode": "RBM-N",
+      "summary": "Bhatt, Priya (P-002) has a single, isolated night shift on Wed, Sep 30 (RBM-N), not adjacent to another night",
+      "detail": "Night blocks of 2–3 are the norm and preferred; a lone night shift is disruptive to sleep and is what S3 flags.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-30|RBM|RBM-N",
+            "shiftDate": "2026-09-30",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-002",
+            "providerNameRaw": "Bhatt, Priya",
+            "startDateTime": "2026-09-30T23:00:00.000Z",
+            "endDateTime": "2026-10-01T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          }
+        ]
+      },
+      "suggestedAction": "Pair this with an adjacent night shift, or move it to someone already working a night block nearby."
+    },
+    {
+      "id": "S3-024",
+      "severity": "SOFT",
+      "rule": "S3",
+      "ruleName": "Recovery day after a night block",
+      "providerId": "P-003",
+      "providerName": "Wei Chen",
+      "siteCode": "PHC",
+      "shiftDate": "2026-09-10",
+      "shiftCode": "PHC-D",
+      "summary": "Wei Chen (P-003) is scheduled on Thu, Sep 10, the day right after a 3-night block (Mon, Sep 7 to Wed, Sep 9)",
+      "detail": "The group's own notes treat the day after a night block as a recovery day providers expect off.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-07|RBM|RBM-N",
+            "shiftDate": "2026-09-07",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-003",
+            "providerNameRaw": "Wei Chen",
+            "startDateTime": "2026-09-07T23:00:00.000Z",
+            "endDateTime": "2026-09-08T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          },
+          {
+            "key": "2026-09-08|RBM|RBM-N",
+            "shiftDate": "2026-09-08",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-003",
+            "providerNameRaw": "Wei Chen",
+            "startDateTime": "2026-09-08T23:00:00.000Z",
+            "endDateTime": "2026-09-09T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          },
+          {
+            "key": "2026-09-09|RBM|RBM-N",
+            "shiftDate": "2026-09-09",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-003",
+            "providerNameRaw": "Wei Chen",
+            "startDateTime": "2026-09-09T23:00:00.000Z",
+            "endDateTime": "2026-09-10T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          }
+        ],
+        "recoveryDay": "2026-09-10",
+        "scheduledOnRecoveryDay": [
+          {
+            "key": "2026-09-10|PHC|PHC-D",
+            "shiftDate": "2026-09-10",
+            "siteCode": "PHC",
+            "shiftCode": "PHC-D",
+            "startTime": "08:00",
+            "endTime": "20:00",
+            "providerId": "P-003",
+            "providerNameRaw": "Wei Chen",
+            "startDateTime": "2026-09-10T08:00:00.000Z",
+            "endDateTime": "2026-09-10T20:00:00.000Z",
+            "isNight": false,
+            "durationHours": 12
+          }
+        ]
+      },
+      "suggestedAction": "Give this provider the day after the night block off; reassign the recovery-day shift."
+    },
+    {
+      "id": "S3-025",
+      "severity": "SOFT",
+      "rule": "S3",
+      "ruleName": "Recovery day after a night block",
+      "providerId": "P-005",
+      "providerName": "Ellison, Tom",
+      "siteCode": "RBM",
+      "shiftDate": "2026-09-12",
+      "shiftCode": "RBM-D",
+      "summary": "Ellison, Tom (P-005) is scheduled on Sat, Sep 12, the day right after a 2-night block (Thu, Sep 10 to Fri, Sep 11)",
+      "detail": "The group's own notes treat the day after a night block as a recovery day providers expect off.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-10|RBM|RBM-N",
+            "shiftDate": "2026-09-10",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-005",
+            "providerNameRaw": "Ellison, Tom",
+            "startDateTime": "2026-09-10T23:00:00.000Z",
+            "endDateTime": "2026-09-11T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          },
+          {
+            "key": "2026-09-11|RBM|RBM-N",
+            "shiftDate": "2026-09-11",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-005",
+            "providerNameRaw": "Ellison, Tom",
+            "startDateTime": "2026-09-11T23:00:00.000Z",
+            "endDateTime": "2026-09-12T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          }
+        ],
+        "recoveryDay": "2026-09-12",
+        "scheduledOnRecoveryDay": [
+          {
+            "key": "2026-09-12|RBM|RBM-D",
+            "shiftDate": "2026-09-12",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-D",
+            "startTime": "07:00",
+            "endTime": "17:00",
+            "providerId": "P-005",
+            "providerNameRaw": "Ellison, Tom",
+            "startDateTime": "2026-09-12T07:00:00.000Z",
+            "endDateTime": "2026-09-12T17:00:00.000Z",
+            "isNight": false,
+            "durationHours": 10
+          }
+        ]
+      },
+      "suggestedAction": "Give this provider the day after the night block off; reassign the recovery-day shift."
+    },
+    {
+      "id": "S3-026",
+      "severity": "SOFT",
+      "rule": "S3",
+      "ruleName": "Recovery day after a night block",
+      "providerId": "P-007",
+      "providerName": "Gupta, Anil",
+      "siteCode": "RBM",
+      "shiftDate": "2026-09-22",
+      "shiftCode": "RBM-D",
+      "summary": "Gupta, Anil (P-007) is scheduled on Tue, Sep 22, the day right after a 5-night block (Thu, Sep 17 to Mon, Sep 21)",
+      "detail": "The group's own notes treat the day after a night block as a recovery day providers expect off.",
+      "evidence": {
+        "run": [
+          {
+            "key": "2026-09-17|PHC|PHC-N",
+            "shiftDate": "2026-09-17",
+            "siteCode": "PHC",
+            "shiftCode": "PHC-N",
+            "startTime": "20:00",
+            "endTime": "08:00",
+            "providerId": "P-007",
+            "providerNameRaw": "Gupta, Anil",
+            "startDateTime": "2026-09-17T20:00:00.000Z",
+            "endDateTime": "2026-09-18T08:00:00.000Z",
+            "isNight": true,
+            "durationHours": 12
+          },
+          {
+            "key": "2026-09-18|RBM|RBM-N",
+            "shiftDate": "2026-09-18",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-007",
+            "providerNameRaw": "Gupta, Anil",
+            "startDateTime": "2026-09-18T23:00:00.000Z",
+            "endDateTime": "2026-09-19T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          },
+          {
+            "key": "2026-09-19|RBM|RBM-N",
+            "shiftDate": "2026-09-19",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-007",
+            "providerNameRaw": "Gupta, Anil",
+            "startDateTime": "2026-09-19T23:00:00.000Z",
+            "endDateTime": "2026-09-20T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          },
+          {
+            "key": "2026-09-20|RBM|RBM-N",
+            "shiftDate": "2026-09-20",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-007",
+            "providerNameRaw": "Gupta, Anil",
+            "startDateTime": "2026-09-20T23:00:00.000Z",
+            "endDateTime": "2026-09-21T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          },
+          {
+            "key": "2026-09-21|RBM|RBM-N",
+            "shiftDate": "2026-09-21",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-N",
+            "startTime": "23:00",
+            "endTime": "07:00",
+            "providerId": "P-007",
+            "providerNameRaw": "Gupta, Anil",
+            "startDateTime": "2026-09-21T23:00:00.000Z",
+            "endDateTime": "2026-09-22T07:00:00.000Z",
+            "isNight": true,
+            "durationHours": 8
+          }
+        ],
+        "recoveryDay": "2026-09-22",
+        "scheduledOnRecoveryDay": [
+          {
+            "key": "2026-09-22|RBM|RBM-D",
+            "shiftDate": "2026-09-22",
+            "siteCode": "RBM",
+            "shiftCode": "RBM-D",
+            "startTime": "07:00",
+            "endTime": "17:00",
+            "providerId": "P-007",
+            "providerNameRaw": "Gupta, Anil",
+            "startDateTime": "2026-09-22T07:00:00.000Z",
+            "endDateTime": "2026-09-22T17:00:00.000Z",
+            "isNight": false,
+            "durationHours": 10
+          }
+        ]
+      },
+      "suggestedAction": "Give this provider the day after the night block off; reassign the recovery-day shift."
+    },
+    {
+      "id": "S4-027",
+      "severity": "SOFT",
+      "rule": "S4",
+      "ruleName": "Distribute weekend shifts equitably",
+      "providerId": "P-004",
+      "providerName": "Delgado, Rosa",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "Delgado, Rosa (P-004) works 1 weekend shift(s), vs. a group average of 3.2",
+      "detail": "Counts every Saturday/Sunday shift across the whole roster.",
+      "evidence": {
+        "weekendCount": 1,
+        "groupAverage": 3.2
+      },
+      "suggestedAction": "This provider has room to take on more weekend coverage if others are overloaded."
+    },
+    {
+      "id": "H8-016",
+      "severity": "DATA_ISSUE",
+      "rule": "H8",
+      "ruleName": "Assigned load within target band (can't be checked: target missing)",
+      "providerId": "P-005",
+      "providerName": "Ellison, Tom",
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "Ellison, Tom (P-005) has no load target on the roster, so H8 can't be evaluated",
+      "detail": "providers.csv has no target_type/target_value for this provider. They are currently assigned 15 shifts, but there's nothing to compare that against.",
+      "evidence": {
+        "assignedShiftCount": 15
+      },
+      "suggestedAction": "Get a load target from the roster owner before this schedule can be signed off for this provider."
+    },
+    {
+      "id": "DATA-001",
+      "severity": "DATA_ISSUE",
+      "rule": "DATA",
+      "ruleName": "Source data quality",
+      "providerId": null,
+      "providerName": null,
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "P-005 (Ellison, Tom) is missing a load target (target_type/target_value). Load-band checks cannot run for this provider.",
+      "detail": "Source: providers.xlsx",
+      "evidence": {
+        "file": "providers.xlsx"
+      },
+      "suggestedAction": "Fix at the source file and re-run the audit."
+    },
+    {
+      "id": "DATA-002",
+      "severity": "DATA_ISSUE",
+      "rule": "DATA",
+      "ruleName": "Source data quality",
+      "providerId": null,
+      "providerName": null,
+      "siteCode": null,
+      "shiftDate": null,
+      "shiftCode": null,
+      "summary": "P-001 is listed as \"Dr Arnold Arnold\" here but \"Arnold, Marcus\" on the roster. Matched by provider_id; please confirm this is the same person.",
+      "detail": "Source: preferences.xlsx",
+      "evidence": {
+        "file": "preferences.xlsx"
+      },
+      "suggestedAction": "Fix at the source file and re-run the audit."
+    }
+  ]
+}

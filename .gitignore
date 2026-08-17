@@ -1,0 +1,10 @@
+node_modules
+dist
+.DS_Store
+
+# Source roster/schedule data — treated as sensitive, not committed.
+# Audit output derived from it (output/, web/src/data/) still is.
+data/*.xlsx
+
+# Local Claude Code settings — not project content.
+.claude/
