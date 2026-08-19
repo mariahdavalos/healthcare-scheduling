@@ -70,3 +70,48 @@ It would be a mistake almost everywhere else in this system, including:
 - **The rule checks themselves (H1-H9, S1-S4).**
 - **Generating the schedule itself.** That's not a language-generation task.
 - **The date and time formatting just added to make finding text readable.** 
+
+
+## Sizing the problem before the solver sees it
+
+### First parameter of attack
+
+Days. Staffing (providers and shifts) and sites are non negotiables in the real world. While mathematically shifts and shifts per day is the most impactful to the result, we aren't able to dictate to a client how to organize their business structure. 
+
+### Shrinking proposals
+
+#### Solve by batching
+
+Solve in batches, a week and a couple days or a week and a half at a time. While a week is a shorter batch, the overlap of +- 2 days is critical to allow for cushioning night shifts and rest periods. It's important that each batch builds on the context of the next to avoid falling into the shortcut trap. This is actually a common solution in optimization of MCPs for large data LLMs called a "rolling horizon" and has been proven to improve efficiency. 
+
+##### Cost
+
+As with any batching, context is limited and future looking analysis is non functional. The fix for the batched schedule may be the best given the current week (and change), but with the context of following weeks the schedule may have been more optimal if a day or shift had been switched out. Once the first batch has passed, its context isn't easily modified, if it can be at all.  
+
+##### Metrics
+
+The audit tool is able to verify that schedules are compatible with each batch as we iterate. 
+
+#### Immutables and human-in-the-loop ideology
+
+Rather than having the solver tackle the entire month from nothing, humans can define immutables and have the solver fill in the gaps. Things like hardship requests are non negotiable, and should not need to be moved around by the solver. Instead, solve around the immutables. 
+
+Humans can also make calls that are obvious to us, but not the solver, such as physican credentials being identical, and thus allowing the solver to treat them interchangeably in scheduling as one unit. 
+
+This is similar to prompt optimization. Generic requests to LLMs will always return less accurate, less meaningful results that consume more tokens than structured prompts with clear definitions that help the LLM define parameters and fill in the blanks as needed.
+
+##### Cost 
+
+Human review and time costs money and requires context. The extra staffing and funding may not be practical, or require more time on the company's side to manage as part of the product suite (and thus time and money being offloaded onto the company rather than the client). 
+
+##### Metrics
+
+This would likely require some A/B testing to verify performance. We could set up a test against some pre defined goals, like how many iterations or how much time it takes to correctly resolve the schedule with and without human intervention, and another with immutables, and a third with both, then compare the results across the board. 
+
+### UI Offloading
+
+Human review specifically, not immutables, should be moved to the UI. These are judgement calls based on context and experience; while we can leverage them in the solver and formulas, it's more measurably more reliable and less expensive to handle them on a case by case audit to catch all edge cases. Reliability is typically a client's top 5 priority, and can make or break a reputation; getting it right is critical and passing it off to the solver is a hit or miss in results. 
+
+### Shortcut trap
+
+Asking the solver to just handle one week at a time would be fast and similar to our batching approach for optimization, but without the context reconciliation of each week, nights and rest periods go unresolved and any rules that require month-long context (like needing 10 shifts over the 1 month period) are impossible to keep track of on an isolated per-week basis context. It will just bring us back to our original problem.
